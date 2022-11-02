@@ -27,7 +27,7 @@
 
                                         <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
                                             <li class="nav-item">
-                                                <a class="nav-link active" data-toggle="tab" href="#tab_general"><em class="icon ni ni-user-circle"></em><span>{{ __('Общие') }}</span></a>
+                                                <a class="nav-link active" data-toggle="tab" href="#tab_general"><em class="icon ni ni-layer-fill"></em><span>{{ __('Общие') }}</span></a>
                                             </li>
                                         </ul><!-- .nav-tabs -->
                                         <div class="tab-content">

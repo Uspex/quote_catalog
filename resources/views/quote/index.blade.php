@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
-@section('page_title', __('Разрешения / Правила'))
-@section('page_excerpt', __('Разрешения / Правила'))
+@section('page_title', __('Мои цитаты'))
+@section('page_excerpt', __('Мои цитаты'))
 
 @section('content')
+
     <div class="nk-content-body">
         <div class="nk-block-head nk-block-head-sm">
             <div class="nk-block-between g-3">
                 <div class="nk-block-head-content">
-                    <h3 class="nk-block-title page-title">{{ __('Разрешения / Правила') }}</h3>
+                    <h3 class="nk-block-title page-title">{{ __('Мои цитаты') }}</h3>
                 </div>
                 <div class="nk-block-head-content">
                     <div class="nk-block-head-content">
-                        <a href="{{ route('permission.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>{{ __('Добавить правило') }}</span></a>
+                        <a href="{{ route('quote.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>{{ __('Добавить цитату') }}</span></a>
                     </div>
                 </div>
             </div>
@@ -25,22 +26,18 @@
                         <div class="card-inner p-0">
                             <div class="nk-tb-list">
                                 <div class="nk-tb-item nk-tb-head">
-                                    <div class="nk-tb-col tb-col-sm"><span>{{ __('slug') }}</span></div>
-                                    <div class="nk-tb-col"><span>{{ __('Название') }}</span></div>
-                                    <div class="nk-tb-col"><span>{{ __('группа') }}</span></div>
+                                    <div class="nk-tb-col"><span>{{ __('Цитата') }}</span></div>
+                                    <div class="nk-tb-col text-center"><span>{{ __('Автор') }}</span></div>
                                     <div class="nk-tb-col text-right"><em class="icon ni ni-setting"></em></div>
                                 </div>
 
                                 @foreach($paginator as $item)
-                                    <div class="nk-tb-item">
-                                        <div class="nk-tb-col tb-col-sm">
-                                            <a href="{{ route('permission.edit', $item->id) }}"><span>{{ $item->name }}</span></a>
+                                    <div class="nk-tb-item @if($item->deleted_at) bg-danger text-white @endif" @if($item->deleted_at) data-toggle="tooltip" data-placement="top" title="{{ __('Запись снята с публикации') }}" @endif>
+                                        <div class="nk-tb-col tb-col-xxl">
+                                            <span>{!! $item->excerpt !!}</span>
                                         </div>
-                                        <div class="nk-tb-col">
-                                            <span>{{ $item->display_name }}</span>
-                                        </div>
-                                        <div class="nk-tb-col">
-                                            <span>{{ $item->group }}</span>
+                                        <div class="nk-tb-col text-center">
+                                            <span>{{ $item->author }}</span>
                                         </div>
                                         <div class="nk-tb-col nk-tb-col-tools">
                                             <ul class="nk-tb-actions gx-1 my-n1">
@@ -49,9 +46,9 @@
                                                         <a class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                         <div class="dropdown-menu dropdown-menu-right">
                                                             <ul class="link-list-opt no-bdr">
-                                                                <li><a href="{{ route('permission.edit', $item->id) }}"><em class="icon ni ni-edit"></em><span>{{ __('Редактировать') }}</span></a></li>
+                                                                <li><a href="{{ route('quote.edit', $item->id) }}"><em class="icon ni ni-edit"></em><span>{{ __('Редактировать') }}</span></a></li>
                                                                 <li>
-                                                                    <form method="POST" action="{{ route('permission.destroy', $item->id) }}">
+                                                                    <form method="POST" action="{{ route('quote.destroy', $item->id) }}">
                                                                         @method('DELETE')
                                                                         @csrf
                                                                         <button type="submit" class="btn btn-link btn-link-light"><em class="icon ni ni-trash"></em><span>{{ __('Удалить') }}</span></button>

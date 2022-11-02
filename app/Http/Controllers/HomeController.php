@@ -20,9 +20,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function welcome()
+    public function homepage()
     {
-        return redirect()->route('login');
+
+        return view('homepage');
     }
 
     /**

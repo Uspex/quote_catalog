@@ -13,28 +13,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'homepage'])->name('homepage');
 
 Auth::routes();
 
 //Admin
-Route::group(['middleware' => ['auth', 'role:root|manager']], function(){
+Route::group(['middleware' => ['auth']], function(){
 
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
-    //Роли
-    Route::group(['namespace' => 'Role'], function(){
-        Route::resource('role', '\App\Http\Controllers\Role\RoleController')->names('role');
+    //Цитаты
+    Route::group(['namespace' => 'Quote'], function(){
+        Route::resource('quote', '\App\Http\Controllers\Quote\QuoteController')->except(['show'])->names('quote');
     });
 
-    //Правила / Разрешения
-    Route::group(['namespace' => 'Permission'], function(){
-        Route::resource('permission', '\App\Http\Controllers\Permission\PermissionController')->names('permission');
+    Route::group(['middleware' => ['auth', 'role:root']], function(){
+
+        //Роли
+        Route::group(['namespace' => 'Role'], function(){
+            Route::resource('role', '\App\Http\Controllers\Role\RoleController')->names('role');
+        });
+
+        //Правила / Разрешения
+        Route::group(['namespace' => 'Permission'], function(){
+            Route::resource('permission', '\App\Http\Controllers\Permission\PermissionController')->names('permission');
+        });
+
+        //Пользователи
+        Route::group(['namespace' => 'User'], function() {
+            Route::resource('user', '\App\Http\Controllers\User\UserController')->except(['show'])->names('user');
+        });
     });
 
-    //Пользователи
-    Route::group(['namespace' => 'User'], function() {
-        Route::resource('user', '\App\Http\Controllers\User\UserController')->except(['show'])->names('user');
-    });
 });
 

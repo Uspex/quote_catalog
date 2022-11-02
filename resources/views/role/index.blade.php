@@ -1,78 +1,80 @@
 @extends('layouts.app')
 
-@section('page_title', __('Категории'))
-@section('page_excerpt', __('Категории'))
+@section('page_title', __('Роли'))
+@section('page_excerpt', __('Роли'))
 
 @section('content')
+
     <div class="nk-content-body">
         <div class="nk-block-head nk-block-head-sm">
             <div class="nk-block-between g-3">
                 <div class="nk-block-head-content">
                     <h3 class="nk-block-title page-title">{{ __('Роли') }}</h3>
-                </div><!-- .nk-block-head-content -->
+                </div>
                 <div class="nk-block-head-content">
                     <div class="nk-block-head-content">
                         <a href="{{ route('role.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>{{ __('Добавить роль') }}</span></a>
-                    </div><!-- .nk-block-head-content -->
-                </div><!-- .nk-block-head-content -->
-            </div><!-- .nk-block-between -->
-        </div><!-- .nk-block-head -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="nk-block">
-            <div class="card card-bordered card-stretch">
+            <div class="card card-bordered">
                 @if($paginator->count())
                     <div class="card-inner-group">
                         <div class="card-inner p-0">
-                            <table class="table table-tranx">
-                                <thead>
-                                <tr class="tb-tnx-head">
-                                    <th class="tb-tnx-info"><span>{{ __('Название') }}</span></th>
-                                    <th class="tb-tnx-id"><span>{{ __('slug') }}</span></th>
-                                    <th class="tb-tnx-action"><span>&nbsp;</span></th>
-                                </tr><!-- tb-tnx-item -->
-                                </thead>
-                                <tbody>
+                            <div class="nk-tb-list">
+                                <div class="nk-tb-item nk-tb-head">
+                                    <div class="nk-tb-col"><span>{{ __('Название') }}</span></div>
+                                    <div class="nk-tb-col"><span>{{ __('slug') }}</span></div>
+                                    <div class="nk-tb-col text-right"><em class="icon ni ni-setting"></em></div>
+                                </div>
+
                                 @foreach($paginator as $item)
-                                    <tr class="tb-tnx-item">
-                                        <td class="tb-tnx-id">
-                                            <a href="{{ route('role.edit', $item->id) }}"><span>{{ $item->name  }}</span></a>
-                                        </td>
-                                        <td class="tb-tnx-info">
-                                            <div class="tb-tnx-desc">
-                                                <span class="title">{{ $item->display_name }}</span>
-                                            </div>
-                                        </td>
-                                        <td class="tb-tnx-action">
-                                            <div class="dropdown">
-                                                <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-sm">
-                                                    <ul class="link-list-plain">
-                                                        <li><a href="{{ route('role.edit', $item->id) }}">{{ __('Редактировать') }}</a></li>
-                                                        <li>
-                                                            <form method="POST" action="{{ route('role.destroy', $item->id) }}">
-                                                                @method('DELETE')
-                                                                @csrf
-                                                                <button type="submit" class="btn btn-link btn-link-light">{{ __('Удалить') }}</button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr><!-- tb-tnx-item -->
+                                    <div class="nk-tb-item">
+                                        <div class="nk-tb-col tb-col-sm">
+                                            <a href="{{ route('role.edit', $item->id) }}"><span>{{ $item->name }}</span></a>
+                                        </div>
+                                        <div class="nk-tb-col">
+                                            <span>{{ $item->display_name }}</span>
+                                        </div>
+                                        <div class="nk-tb-col nk-tb-col-tools">
+                                            <ul class="nk-tb-actions gx-1 my-n1">
+                                                <li class="mr-n1">
+                                                    <div class="dropdown">
+                                                        <a class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <ul class="link-list-opt no-bdr">
+                                                                <li><a href="{{ route('role.edit', $item->id) }}"><em class="icon ni ni-edit"></em><span>{{ __('Редактировать') }}</span></a></li>
+                                                                <li>
+                                                                    <form method="POST" action="{{ route('role.destroy', $item->id) }}">
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                        <button type="submit" class="btn btn-link btn-link-light"><em class="icon ni ni-trash"></em><span>{{ __('Удалить') }}</span></button>
+                                                                    </form>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 @endforeach
-                                </tbody>
-                            </table>
-                        </div><!-- .card-inner -->
+                            </div>
+                        </div>
 
                         @if($paginator->hasPages())
                             <div class="card-inner">
-                                <ul class="pagination justify-content-center justify-content-md-start">
-                                    {{ $paginator->links() }}
-                                </ul><!-- .pagination -->
-                            </div><!-- .card-inner -->
+                                <div class="nk-block-between-md g-3">
+                                    <div class="g">
+                                        {{ $paginator->links() }}
+                                    </div>
+                                </div>
+                            </div>
                         @endif
-
-                    </div><!-- .card-inner-group -->
+                    </div>
 
                 @else
                     <div class="card-inner-group">
@@ -81,13 +83,13 @@
                                 <div class="card-title">
                                     <h5 class="title">{{ __('Список пуст') }}</h5>
                                 </div>
-                            </div><!-- .card-title-group -->
+                            </div>
                         </div>
-                    </div><!-- .card-inner-group -->
-                @endif
+                    </div>
 
-            </div><!-- .card -->
-        </div><!-- .nk-block -->
+                @endif
+            </div>
+        </div>
     </div>
 @endsection
 

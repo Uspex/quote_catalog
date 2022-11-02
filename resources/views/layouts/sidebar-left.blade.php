@@ -15,38 +15,33 @@
             <div class="nk-sidebar-menu" data-simplebar>
                 <ul class="nk-menu">
                     <li class="nk-menu-item">
-                        <a href="{{ route('dashboard') }}" class="nk-menu-link">
+                        <a href="{{ route('quote.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-dashlite"></em></span>
-                            <span class="nk-menu-text">{{ __('Главная') }}</span>
+                            <span class="nk-menu-text">{{ __('Мои цитаты') }}</span>
                         </a>
                     </li><!-- .nk-menu-item -->
 
 
-
+                    @role('root')
                     <li class="nk-menu-heading">
                         <h6 class="overline-title text-primary-alt">{{ __('Пользователи') }}</h6>
                     </li><!-- .nk-menu-heading -->
 
-                    @ability('root', 'list_user')
+
                     <li class="nk-menu-item">
                         <a href="{{ route('user.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
                             <span class="nk-menu-text">{{ __('Пользователи') }}</span>
                         </a>
                     </li><!-- .nk-menu-item -->
-                    @endability
 
-
-                    @ability('root', 'list_role')
                     <li class="nk-menu-item">
                         <a href="{{ route('role.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-security"></em></span>
                             <span class="nk-menu-text">{{ __('Роли') }}</span>
                         </a>
                     </li><!-- .nk-menu-item -->
-                    @endability
 
-                    @ability('root', 'list_permission')
                     <li class="nk-menu-item">
                         <a href="{{ route('permission.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-policy"></em></span>

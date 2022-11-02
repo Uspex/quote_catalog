@@ -12,7 +12,7 @@
                     <h3 class="nk-block-title page-title">{{ __('Редактирование правила') }} </h3>
                 </div>
                 <div class="nk-block-head-content">
-                    <a href="{{ route('role.index') }}" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>{{ __('Назад') }}</span></a>
+                    <a href="{{ route('permission.index') }}" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>{{ __('Назад') }}</span></a>
                 </div>
             </div>
         </div><!-- .nk-block-head -->
@@ -26,7 +26,7 @@
 
                             <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#tab_general"><em class="icon ni ni-user-circle"></em><span>{{ __('Общие') }}</span></a>
+                                    <a class="nav-link active" data-toggle="tab" href="#tab_general"><em class="icon ni ni-layer-fill"></em><span>{{ __('Общие') }}</span></a>
                                 </li>
                             </ul><!-- .nav-tabs -->
                             <div class="tab-content">
