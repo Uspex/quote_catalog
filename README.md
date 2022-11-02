@@ -1,5 +1,7 @@
 ## Quote catalog - тестовое задание, сервис уникальных цитат 
 
+#### Базовый образ админки для быстрого старта взят из репозитория https://github.com/Uspex/Laravel-Start
+
 Комплект:
 - Laravel Framework 9.9.0
 - Laratrust (https://laratrust.santigarcor.me/) - система управления Ролями
