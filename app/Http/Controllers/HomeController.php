@@ -22,7 +22,7 @@ class HomeController extends Controller
      */
     public function homepage()
     {
-        $quote_paginator = $this->quoteRepository->getPaginate(2);
+        $quote_paginator = $this->quoteRepository->getPaginate(5);
 
         return view('homepage', compact('quote_paginator'));
     }
