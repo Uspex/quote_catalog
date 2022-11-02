@@ -38,24 +38,58 @@
         <div class="nk-wrap nk-wrap-nosidebar">
             <!-- content @s -->
             <div class="nk-content-body">
-                <div class="nk-block-head nk-block-head-sm">
-                    <div class="nk-block-between g-3">
-                        <div class="nk-block-head-content">
-                            <h3 class="nk-block-title page-title">{{ __('Цитаты') }}</h3>
-                        </div>
-                        <div class="nk-block-head-content">
+                <div class="components-preview wide-md mx-auto pt-5">
+
+                    <div class="nk-block-head nk-block-head-sm">
+                        <div class="nk-block-between g-3">
                             <div class="nk-block-head-content">
-                                <a href="{{ route('quote.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>{{ __('Добавить цитату') }}</span></a>
+                                <h3 class="nk-block-title page-title">{{ __('Цитаты') }}</h3>
+                            </div>
+                            <div class="nk-block-head-content">
+                                <div class="nk-block-head-content">
+                                    <a href="{{ route('quote.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>{{ __('Добавить цитату') }}</span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    @if($quote_paginator->count())
+
+                        @foreach($quote_paginator as $item)
+                            <div class="code-block mt-4">
+                                <h6 class="overline-title title">{{ __('Цитата #') }}{{ $item->id }}</h6>
+                                <div class="btn btn-sm clipboard-init" >
+                                    <span class="clipboard-text">Copy</span><span class="clipboard-text">Copy</span><span class="clipboard-text">Copy</span><span class="clipboard-text">Copy</span>
+                                </div>
+
+                                <div class="p-3 bg-secondary-dim text-secondary">{!! $item->quote !!}</div>
+
+                                <div class="mt-3 d-flex justify-content-between align-items-center">
+                                    <div class="text-soft">
+                                        {{ __('Дата:') }} <code>{{ $item->created_at }}</code>
+                                    </div>
+                                    <div class="text-soft">
+                                        {{ __('Автор:') }} <code>{{ $item->author }}</code>
+                                    </div>
+                                </div>
+                            </div>
+
+                        @endforeach
+
+                        @if($quote_paginator->hasPages())
+                            <div class="card-inner">
+                                <div class="nk-block-between-md g-3">
+                                    <div class="g">
+                                        {{ $quote_paginator->links('vendor.pagination.bootstrap-4') }}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                    @endif
                 </div>
 
-                <div class="nk-block">
-                    <div class="card card-bordered">
-                        @dd($quote_paginator)
-                    </div>
-                </div>
+
             </div>
             <!-- wrap @e -->
         </div>

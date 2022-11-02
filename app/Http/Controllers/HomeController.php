@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Repositories\QuoteRepository;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @var QuoteRepository
      */
+    private $quoteRepository;
+
     public function __construct()
     {
-        $this->middleware('auth');
-    }
 
+        $this->quoteRepository = app(QuoteRepository::class);
+    }
     /**
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function homepage()
     {
+        $quote_paginator = $this->quoteRepository->getPaginate(2);
 
-        return view('homepage');
+        return view('homepage', compact('quote_paginator'));
     }
 
     /**

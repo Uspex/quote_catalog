@@ -38,8 +38,9 @@
                                                         <label class="form-label" for="quote">{{ __('Текст цитаты') }}</label>
                                                         <textarea name="quote"
                                                                   id="quote"
-                                                                  class="form-control summernote-basic"
-                                                                  rows="3">{{ old('quote') }}</textarea>
+                                                                  class="form-control"
+                                                                  rows="3"
+                                                                  required>{{ old('quote') }}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3">
