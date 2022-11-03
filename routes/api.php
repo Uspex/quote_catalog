@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['namespace' => 'Quote'], function () {
         Route::get('quote', [App\Http\Controllers\Api\Quote\QuoteController::class, 'index'])->name('api.quote.index');
         Route::post('quote/create', [App\Http\Controllers\Api\Quote\QuoteController::class, 'create'])->name('api.quote.create');
+        Route::post('quote/update/{id}', [App\Http\Controllers\Api\Quote\QuoteController::class, 'update'])->name('api.quote.update');
     });
 
 });

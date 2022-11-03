@@ -87,26 +87,11 @@ class QuoteController extends Controller
 
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $item = $this->quoteRepository->getEdit($id);
-
-        $this->checkItem($item);
-
-        return view('quote.edit', compact('item'));
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param QuoteUpdateRequest $request
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(QuoteUpdateRequest $request, $id)
@@ -114,44 +99,49 @@ class QuoteController extends Controller
         $item = $this->quoteRepository->getEdit($id);
 
         $data = $request->all();
-        $data['editor_id'] = Auth::id();
+        if(!isset($data['editor_id'])){
+            $user = User::first();
+
+            $data['editor_id'] = $user->id;
+        }
 
         $result = $item->update($data);
 
         if ($result) {
-            return redirect()
-                ->route('quote.index')
-                ->with(['success' => trans('quote.update.success')]);
+            return response()->json([
+                'data' => $item,
+                'message' => trans('quote.update.success')
+            ], 200);
         } else {
-            return back()
-                ->withErrors(['msg' => trans('quote.update.error')])
-                ->withInput();
+            return response()->json([
+                'data' => [],
+                'message'   => trans('quote.update.error'),
+            ], 500);
         }
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
         $item = $this->quoteRepository->getEdit($id);
 
-        $this->checkItem($item);
-
         $result = $item->delete();
 
         if ($result) {
-            return redirect()
-                ->route('quote.index')
-                ->with(['success' => trans('quote.delete.success')]);
+            return response()->json([
+                'data' => $item,
+                'message' => trans('quote.delete.success')
+            ], 200);
         } else {
-            return back()
-                ->withErrors(['msg' => trans('quote.delete.error')])
-                ->withInput();
+            return response()->json([
+                'data' => [],
+                'message'   => trans('quote.delete.error'),
+            ], 500);
         }
     }
 
