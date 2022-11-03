@@ -57,9 +57,11 @@
 
                         @foreach($quote_paginator as $item)
                             <div class="code-block mt-4">
-                                <h6 class="overline-title title">{{ __('Цитата #') }}{{ $item->id }}</h6>
+                                <h6 class="overline-title title">{{ __('Цитата #') }}{{ $item->id }} <code>{{ __('Цитатой поделились:') }}</code> [{{ $item->share_count }}]</h6>
                                 <div class="btn btn-sm clipboard-init" >
-                                    <span class="clipboard-text">Copy</span><span class="clipboard-text">Copy</span><span class="clipboard-text">Copy</span><span class="clipboard-text">Copy</span>
+                                    <span class="clipboard-text show_modal_share mr-2" data-modal="#email_share_modal" data-object-id="{{ $item->id }}" data-toggle="tooltip" data-placement="top" title="{{ __('Поделиться через email') }}"><em class="icon ni ni-mail-fill" ></em></span>
+                                    <span class="clipboard-text show_modal_share mr-2" data-modal="#telegram_share_modal" data-object-id="{{ $item->id }}" data-toggle="tooltip" data-placement="top" title="{{ __('Поделиться через telegram') }}"><em class="icon ni ni-telegram"></em></span>
+                                    <span class="clipboard-text show_modal_share" data-modal="#viber_share_modal" data-object-id="{{ $item->id }}" data-toggle="tooltip" data-placement="top" title="{{ __('Поделиться через viber') }}"><em class="icon ni ni-viber"></em></span>
                                 </div>
 
                                 <div class="p-3 bg-secondary-dim text-secondary">{!! $item->quote !!}</div>
@@ -97,7 +99,16 @@
     </div>
     <!-- main @e -->
 
+    @include('modules.email_share_modal')
+    @include('modules.telegram_share_modal')
+        @include('modules.viber_share_modal')
+    @include('modules.success_modal')
+    @include('modules.error_modal')
 </div>
+
+<script src="{{ asset('assets/js/bundle.js') }}"></script>
+<script src="{{ asset('assets/js/scripts.js') }}"></script>
+<script src="{{ asset('assets/js/custom.js') }}?{{ \Carbon\Carbon::now()->timestamp }}"></script>
 
 </body>
 </html>

@@ -59,6 +59,7 @@ class QuoteRepository extends CoreRepository
             ->when(isset($filter['delete_show']), function ($query) use($filter)  {
                 $query->withTrashed();
             })
+            ->withCount('share')
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
 

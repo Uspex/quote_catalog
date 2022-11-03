@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('object_id')->unsigned();
             $table->string('object_type')->default('quote');
             $table->string('source');
+            $table->string('source_address');
 
             $table->text('message');
             $table->timestamp('send_at')->nullable();

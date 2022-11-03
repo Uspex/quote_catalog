@@ -15,7 +15,7 @@ class Notification extends Model
      * @var array
      */
     protected $fillable = [
-        'object_id', 'object_type', 'source', 'message', 'send_at'
+        'object_id', 'object_type', 'source', 'source_address', 'message', 'send_at'
     ];
 
     /**

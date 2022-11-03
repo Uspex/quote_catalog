@@ -32,6 +32,16 @@ class Quote extends Model
     }
 
     /**
+     * Отправленные цитаты
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function share()
+    {
+        return $this->hasMany(Notification::class, 'object_id')->where('object_type', 'quote');
+    }
+
+    /**
      * Выдержка цитаты
      * @return string
      */

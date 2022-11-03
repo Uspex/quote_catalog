@@ -17,6 +17,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'homepage'])->name(
 
 Auth::routes();
 
+
+Route::post('/notification/send-quote-ajax', [App\Http\Controllers\Notification\NotificationController::class, 'sendQuoteAjax'])->name('notification.send_quote_ajax');
+
 //Admin
 Route::group(['middleware' => ['auth']], function(){
 
