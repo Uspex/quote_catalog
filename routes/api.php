@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'Api'], function () {
+    //Цитаты
+    Route::group(['namespace' => 'Quote'], function () {
+        Route::get('quote', [App\Http\Controllers\Api\Quote\QuoteController::class, 'index'])->name('api.quote.index');
+        Route::post('quote/create', [App\Http\Controllers\Api\Quote\QuoteController::class, 'create'])->name('api.quote.create');
+    });
+
 });
